@@ -60,7 +60,7 @@ theme = "loveit"
   title = "Skynetcat's Blog"
 
   # website description for RSS, SEO, Open Graph and Twitter Cards
-  description = "Articles about what I learn and my interests including Technology, Language Learning, Programming , Linux and open-source"
+  description = "Writing about Technology, Programming, Linux and Open-source"
   
   # website images for Open Graph and Twitter Cards
   images = []
@@ -208,7 +208,7 @@ theme = "loveit"
       title = ""
 
       # subtitle shown in home page (HTML format is supported)
-      subtitle = "Writing about my interests"
+      subtitle = "Writing about Technology, Programming, Linux and Open-source"
 
       # whether to use typeit animation for subtitle
       typeit = true
