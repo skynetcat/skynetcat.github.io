@@ -336,7 +336,7 @@ theme = "loveit"
     linkToMarkdown = true
 
     # whether to show the full text content in RSS
-    rssFullText = false
+    rssFullText = true
     
     # Table of the contents config
     [params.page.toc]
@@ -407,11 +407,12 @@ theme = "loveit"
       X = true
       Threads = true
       Facebook = true
-      Linkedin = false
+      Linkedin = true
+      HackerNews = true
+      Telegram = true
       Whatsapp = false
       Pinterest = false
       Tumblr = false
-      HackerNews = true
       Reddit = false
       VK = false
       Buffer = false
@@ -429,7 +430,6 @@ theme = "loveit"
       Trello = false
       Diaspora = true
       Mix = false
-      Telegram = true
 
     # Comment config
     [params.page.comment]
