@@ -3,7 +3,16 @@
         <title>Skynetcat&#39;s blog</title>
         <link>http://localhost:1313/</link>
         <description>Writing about Technology, Programming, Linux and Open-Source</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 17 May 2025 20:57:31 &#43;0000</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2025 12:31:40 &#43;0000</lastBuildDate>
             <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-        </channel>
+        <item>
+    <title>Getting Started</title>
+    <link>http://localhost:1313/posts/getting-started/</link>
+    <pubDate>Sun, 25 May 2025 12:31:40 &#43;0000</pubDate>
+    <author>Skynetcat</author>
+    <guid>http://localhost:1313/posts/getting-started/</guid>
+    <description><![CDATA[<p>I didn&rsquo;t write anything even though I already made a blog. Sad, isn&rsquo;t it?</p>
+<p>I just came to break the ice and write something. Maybe this will be the start of a blogging habit. I don&rsquo;t know.</p>]]></description>
+</item>
+</channel>
 </rss>
