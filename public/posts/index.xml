@@ -3,7 +3,250 @@
         <title>All Posts - Skynetcat&#39;s blog</title>
         <link>http://localhost:1313/posts/</link>
         <description>All Posts | Skynetcat&#39;s blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2025 12:31:40 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Jun 2025 17:43:20 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Better Qwen 3 Settings</title>
+    <link>http://localhost:1313/posts/better-qwen-3-settings/</link>
+    <pubDate>Mon, 09 Jun 2025 17:43:20 &#43;0000</pubDate>
+    <author>Skynetcat</author>
+    <guid>http://localhost:1313/posts/better-qwen-3-settings/</guid>
+    <description><![CDATA[<p>It&rsquo;s contrary to the recommended settings provided by the Qwen team.</p>
+<p>While I was trying <a href="https://huggingface.co/ggml-org/SmolVLM2-500M-Video-Instruct-GGUF/blob/main/SmolVLM2-500M-Video-Instruct-f16.gguf" target="_blank" rel="noopener noreffer ">SmolVLM2</a> made by huggingface, I noticed it was hallucinating too much.</p>
+<p>I searched for its recommended sampler settings. Maybe something like what was provided for <a href="https://huggingface.co/Qwen/Qwen3-1.7B#best-practices" target="_blank" rel="noopener noreffer ">Qwen 3</a>:</p>
+<blockquote>
+<p>For thinking mode (enable_thinking=True), use Temperature=0.6, TopP=0.95, TopK=20, and MinP=0. DO NOT use greedy decoding, as it can lead to performance degradation and endless repetitions.</p></blockquote>
+<blockquote>
+<p>For non-thinking mode (enable_thinking=False), we suggest using Temperature=0.7, TopP=0.8, TopK=20, and MinP=0.</p></blockquote>
+<p>However, I accidentally found <a href="" rel="">this reddit post</a> that explains how inference settings work for LLMs.</p>
+<p>I just grabbed what was recommended at the end of that post, tried it and modified it a little bit:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>Context Length: 8192
+Temp: 0.1
+Top-P: 0.9
+Top-K: 0
+Min-P: 0.1
+Mirostat Tau: 5
+Mirostat Eta: 0.1
+Repetition penalty range: 2048
+Repetition penalty: 1.3
+Presence penalty: 1</code></pre></div>
+<p>To my surprise, hallucination was cut to the minimum.</p>
+<p>It occured to me to try it also with <a href="https://huggingface.co/unsloth/Qwen3-1.7B-GGUF/blob/main/Qwen3-1.7B-Q4_0.gguf" target="_blank" rel="noopener noreffer ">Qwen 3 1.7b Q4</a> and I found the results better!</p>
+<p>See yourself:
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Think was enabled for both responses</div>
+        </div>
+    </div></p>
+<div class="details admonition question">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>User Request<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Please give me a detailed guide on how to manage my email efficiently as I have 99+ emails unread. They are mostly useful emails (newsletters from online creators with useful information)</p>
+<p>I want to tackle this so I can clear my inbox and get much out of all the emails.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition abstract">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-list-ul fa-fw" aria-hidden="true"></i>Response 1: Normal Sampler Settings<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><h1 id="email-management-guide-tackling-99-unread-emails"><strong>Email Management Guide: Tackling 99+ Unread Emails</strong></h1>
+<hr>
+<h2 id="1-organize-your-inbox"><strong>1. Organize Your Inbox</strong></h2>
+<h3 id="a-categorize-emails"><strong>a. Categorize Emails</strong></h3>
+<ul>
+<li><strong>Create folders:</strong> Group emails by importance (e.g., &ldquo;Newsletters,&rdquo; &ldquo;Updates,&rdquo; &ldquo;Follow-ups&rdquo;).</li>
+<li><strong>Labels:</strong> Use tags like &ldquo;Project X,&rdquo; &ldquo;Client A&rdquo; to categorize emails.</li>
+<li><strong>Example:</strong> Label a newsletter as &ldquo;Marketing&rdquo; and a client update as &ldquo;Client A.&rdquo;</li>
+</ul>
+<h3 id="b-use-filters"><strong>b. Use Filters</strong></h3>
+<ul>
+<li><strong>Automate sorting:</strong> Set rules to move emails to specific folders based on sender, subject, or keywords (e.g., &ldquo;All Newsletters&rdquo; → &ldquo;Newsletters&rdquo;).</li>
+</ul>
+<hr>
+<h2 id="2-prioritize-and-mark-important-emails"><strong>2. Prioritize and Mark Important Emails</strong></h2>
+<h3 id="a-star-important-emails"><strong>a. Star Important Emails</strong></h3>
+<ul>
+<li>Mark emails with actionable insights (e.g., &ldquo;Tips for [Topic]&rdquo;).</li>
+<li>Use &ldquo;Star&rdquo; to highlight emails you need to respond to.</li>
+</ul>
+<h3 id="b-set-reminder-alerts"><strong>b. Set Reminder Alerts</strong></h3>
+<ul>
+<li>Enable alerts for emails you need to reply to or follow up on.</li>
+</ul>
+<hr>
+<h2 id="3-delete-vs-archive"><strong>3. Delete vs. Archive</strong></h2>
+<h3 id="a-delete"><strong>a. Delete:</strong></h3>
+<ul>
+<li>Remove emails you no longer need (e.g., spam, duplicates).</li>
+<li><strong>Tip:</strong> Delete emails you’ll never need to free up space.</li>
+</ul>
+<h3 id="b-archive"><strong>b. Archive:</strong></h3>
+<ul>
+<li>Move emails to &ldquo;Archive&rdquo; for future reference.</li>
+<li><strong>Tip:</strong> Archive emails for later use (e.g., a newsletter from a creator).</li>
+</ul>
+<hr>
+<h2 id="4-optimize-your-email-settings"><strong>4. Optimize Your Email Settings</strong></h2>
+<h3 id="a-check-less-frequently"><strong>a. Check Less Frequently</strong></h3>
+<ul>
+<li>Set a &ldquo;Check email every X hours&rdquo; to avoid distractions.</li>
+<li>Use &ldquo;Read Receipts&rdquo; only if you need to reply (e.g., for follow-ups).</li>
+</ul>
+<h3 id="b-use"><strong>b. Use &ldquo;Reply All&rdquo; Wisely</strong></h3>
+<ul>
+<li>Respond to bulk emails with &ldquo;Reply All&rdquo; to save time.</li>
+</ul>
+<hr>
+<h2 id="5-tools--features"><strong>5. Tools &amp; Features</strong></h2>
+<h3 id="a-email-clients"><strong>a. Email Clients</strong></h3>
+<ul>
+<li><strong>Gmail/Outlook:</strong> Use built-in filters and labels.</li>
+<li><strong>Third-party tools:</strong> Apps like <strong>Filterfy</strong> or <strong>Daisy</strong> (for advanced sorting).</li>
+</ul>
+<h3 id="b-calendar-integration"><strong>b. Calendar Integration</strong></h3>
+<ul>
+<li>Sync your calendar with email to manage deadlines and follow-ups.</li>
+</ul>
+<hr>
+<h2 id="6-weekly-clean-up-routine"><strong>6. Weekly Clean-Up Routine</strong></h2>
+<h3 id="a-schedule-a"><strong>a. Schedule a &ldquo;Cleanup Day&rdquo;</strong></h3>
+<ul>
+<li>Dedicate 30 minutes daily to check your inbox.</li>
+<li><strong>Tip:</strong> Use the &ldquo;Star&rdquo; feature to prioritize emails you need to act on.</li>
+</ul>
+<h3 id="b-archive-old-emails"><strong>b. Archive Old Emails</strong></h3>
+<ul>
+<li>Move emails older than 30 days to &ldquo;Archive&rdquo; to keep your inbox clean.</li>
+</ul>
+<hr>
+<h2 id="7-habits-to-build"><strong>7. Habits to Build</strong></h2>
+<ul>
+<li><strong>Set a &ldquo;No-Email&rdquo; Rule:</strong> Avoid opening emails unless you need to reply.</li>
+<li><strong>Use &ldquo;Read Later&rdquo;:</strong> Save emails for later (e.g., a newsletter from a creator).</li>
+<li><strong>Regular Reviews:</strong> Check your inbox weekly to remove duplicates or outdated emails.</li>
+</ul>
+<hr>
+<h2 id="bonus-5-tips-for-maximizing-value"><strong>Bonus: 5 Tips for Maximizing Value</strong></h2>
+<ol>
+<li><strong>Follow Creators:</strong> Subscribe to newsletters for exclusive content.</li>
+<li><strong>Use Templates:</strong> Respond to emails with pre-written replies.</li>
+<li><strong>Batch Replies:</strong> Reply to multiple emails at once.</li>
+<li><strong>Set Boundaries:</strong> Turn off notifications for non-urgent emails.</li>
+<li><strong>Celebrate Progress:</strong> Reward yourself for clearing 10 emails per week.</li>
+</ol>
+<hr>
+<p><strong>Remember:</strong> Email is a tool for connection, not a constant stream. Use it to <em>support</em> your goals, not just accumulate information. 🚀</p></div>
+        </div>
+    </div>
+<div class="details admonition abstract">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-list-ul fa-fw" aria-hidden="true"></i>Response 2: Modified Sampler<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><h3 id="step-by-step-guide-to-organize-your-inbox"><strong>Step-by-Step Guide to Organize Your Inbox</strong></h3>
+<p>Managing 99+ emails requires intentional strategy. Here’s a breakdown tailored to your goals:</p>
+<hr>
+<h4 id="1-categorize-emails-using-labels--folders"><strong>1. Categorize Emails Using Labels &amp; Folders</strong></h4>
+<ul>
+<li><strong>Create Smart Categories</strong>:
+<ul>
+<li>Use existing headers (e.g., “News,”“Project Updates”) or create new ones (e.g., “Creator Insights”).<br>
+<em>Example</em>: Label every newsletter under “Creative Resources” to quickly find relevant updates.</li>
+<li>Assign categories dynamically via filters (e.g., “Subject Line Contains ‘Newsletter’”).</li>
+</ul>
+</li>
+<li><strong>Folder Structure</strong>:
+<ul>
+<li>Prioritize critical tasks first (e.g., “Urgent Follow-Ups”), then non-critical (“Personal Notes”).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="2-automate-email-handling"><strong>2. Automate Email Handling</strong></h4>
+<ul>
+<li><strong>Set Rules in Gmail/Outlook</strong>:
+<ul>
+<li>Automatically move subscriptions to “Read Later.”</li>
+<li>Flag replies vs. forwards (e.g., label “Drafted Reply” for pending responses).</li>
+</ul>
+</li>
+<li><strong>Third-Party Tools</strong>:
+<ul>
+<li>Use plugins like <strong>Email Rule Manager</strong> (for advanced filtering) or integrators like <strong>Zapier</strong> to automate workflows (e.g., sending reminders after a response).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="3-batch-processing-techniques"><strong>3. Batch Processing Techniques</strong></h4>
+<ul>
+<li><strong>Time-Based Scheduling</strong>:
+<ul>
+<li>Open your inbox at fixed times (e.g., morning → check once), reducing distractions during peak hours.</li>
+</ul>
+</li>
+<li><strong>Batch Deletion + Archival</strong>:
+<ul>
+<li>Delete low-priority emails immediately (e.g., marketing campaigns); archive others permanently.</li>
+<li>Example: Move weekly reports to “Archived Projects.”</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="4-build-habits-around-email-checks"><strong>4. Build Habits Around Email Checks</strong></h4>
+<ul>
+<li><strong>Single-Mail Ritual</strong>:
+<ul>
+<li>Only open one email per day (especially mornings/evenings). This reduces cognitive load.</li>
+</ul>
+</li>
+<li><strong>Follow-Up Reminders</strong>:
+<ul>
+<li>Set alerts for deadlines (via Google Calendar / Todoist) to ensure no emails slip through.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="5-leverage-technology-wisely"><strong>5. Leverage Technology Wisely</strong></h4>
+<ul>
+<li><strong>Sync Across Devices</strong>: Ensure cross-device syncing (G Suite/Microsoft Exchange) avoids duplicates.</li>
+<li><strong>Use Filters Instead of Spam</strong>: Create custom filters (e.g., “From [Name]” &gt; “Important News”) to reduce irrelevant traffic.</li>
+</ul>
+<hr>
+<h4 id="6-regular-maintenance-routines"><strong>6. Regular Maintenance Routines</strong></h4>
+<ul>
+<li><strong>Weekly Cleanup</strong>: Sort, delete, and archive monthly.</li>
+<li><strong>Monthly Review</strong>: Check folder balances and adjust priorities quarterly.</li>
+</ul>
+<hr>
+<h4 id="7-mindset-shift-toward-value-extraction"><strong>7. Mindset Shift Toward Value Extraction</strong></h4>
+<ul>
+<li><strong>Highlight Key Messages</strong>: Mark summaries or action-items in drafts/pdfs.</li>
+<li><strong>Avoid Overloading</strong>: Don’t save everything — prioritize actionable insights.</li>
+</ul>
+<hr>
+<h3 id="-bonus-tips">🧠 Bonus Tips</h3>
+<ul>
+<li><strong>Mindfulness Practice</strong>: Reflect daily on why certain emails matter versus others.</li>
+<li><strong>Limit Notifications</strong>: Turn off pop-up notifications except for urgent matters.</li>
+</ul>
+<p>By combining tech solutions with mindful habits, you’ll transform chaos into clarity—a foundation for deeper engagement with creator-content! Would you like personalized recommendations for specific platforms (e.g., Gmail, Thunderbird)?</p>
+</div>
+        </div>
+    </div>
+<p>This post was originally meant to be published on Reddit but as you know, Reddit sucks. As soon as I post something anywhere they tell me that I don&rsquo;t have enough karma or they just delete it.</p>
+<p>Anyways, see you next time :)</p>]]></description>
+</item>
+<item>
     <title>Getting Started</title>
     <link>http://localhost:1313/posts/getting-started/</link>
     <pubDate>Sun, 25 May 2025 12:31:40 &#43;0000</pubDate>
