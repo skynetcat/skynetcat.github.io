@@ -6,19 +6,18 @@
         <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Jun 2025 17:43:20 &#43;0000</lastBuildDate>
             <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Better Qwen 3 Settings</title>
-    <link>http://localhost:1313/posts/better-qwen-3-settings/</link>
+    <title>Better LLM Sampler Settings</title>
+    <link>http://localhost:1313/posts/better-llm-sampler-settings/</link>
     <pubDate>Mon, 09 Jun 2025 17:43:20 &#43;0000</pubDate>
     <author>Skynetcat</author>
-    <guid>http://localhost:1313/posts/better-qwen-3-settings/</guid>
-    <description><![CDATA[<p>It&rsquo;s contrary to the recommended settings provided by the Qwen team.</p>
-<p>While I was trying <a href="https://huggingface.co/ggml-org/SmolVLM2-500M-Video-Instruct-GGUF/blob/main/SmolVLM2-500M-Video-Instruct-f16.gguf" target="_blank" rel="noopener noreffer ">SmolVLM2</a> made by huggingface, I noticed it was hallucinating too much.</p>
+    <guid>http://localhost:1313/posts/better-llm-sampler-settings/</guid>
+    <description><![CDATA[<p>While I was trying <a href="https://huggingface.co/ggml-org/SmolVLM2-500M-Video-Instruct-GGUF/blob/main/SmolVLM2-500M-Video-Instruct-f16.gguf" target="_blank" rel="noopener noreffer ">SmolVLM2</a> made by huggingface, I noticed it was hallucinating too much.</p>
 <p>I searched for its recommended sampler settings. Maybe something like what was provided for <a href="https://huggingface.co/Qwen/Qwen3-1.7B#best-practices" target="_blank" rel="noopener noreffer ">Qwen 3</a>:</p>
 <blockquote>
 <p>For thinking mode (enable_thinking=True), use Temperature=0.6, TopP=0.95, TopK=20, and MinP=0. DO NOT use greedy decoding, as it can lead to performance degradation and endless repetitions.</p></blockquote>
 <blockquote>
 <p>For non-thinking mode (enable_thinking=False), we suggest using Temperature=0.7, TopP=0.8, TopK=20, and MinP=0.</p></blockquote>
-<p>However, I accidentally found <a href="" rel="">this reddit post</a> that explains how inference settings work for LLMs.</p>
+<p>However, I accidentally found <a href="https://www.reddit.com/r/LocalLLaMA/comments/17vonjo/your_settings_are_probably_hurting_your_model_why/" target="_blank" rel="noopener noreffer ">this reddit post</a> that explains how inference settings work for LLMs.</p>
 <p>I just grabbed what was recommended at the end of that post, tried it and modified it a little bit:</p>
 <div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-">
@@ -36,7 +35,7 @@ Repetition penalty range: 2048
 Repetition penalty: 1.3
 Presence penalty: 1</code></pre></div>
 <p>To my surprise, hallucination was cut to the minimum.</p>
-<p>It occured to me to try it also with <a href="https://huggingface.co/unsloth/Qwen3-1.7B-GGUF/blob/main/Qwen3-1.7B-Q4_0.gguf" target="_blank" rel="noopener noreffer ">Qwen 3 1.7b Q4</a> and I found the results better!</p>
+<p>It occured to me to try it also with <a href="https://huggingface.co/unsloth/Qwen3-1.7B-GGUF/blob/main/Qwen3-1.7B-Q4_0.gguf" target="_blank" rel="noopener noreffer ">Qwen 3 1.7b Q4</a> and I found the results better than using its recommended sampler settings!</p>
 <p>See yourself:
 <div class="details admonition note open">
         <div class="details-summary admonition-title">

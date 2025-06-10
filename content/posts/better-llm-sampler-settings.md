@@ -6,8 +6,8 @@ draft: false
 author: "Skynetcat"
 authorLink: "https://skynetcat.github.io/about"
 
-tags: []
-categories: []
+tags: [sampler,llm,local,ai]
+categories: [Local AI]
 
 featuredImage: ""
 featuredImagePreview: ""

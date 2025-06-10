@@ -1,9 +1,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All Posts - Skynetcat&#39;s blog</title>
-        <link>http://localhost:1313/posts/</link>
-        <description>All Posts | Skynetcat&#39;s blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Jun 2025 17:43:20 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
+        <title>Ai - Tag - Skynetcat&#39;s blog</title>
+        <link>http://localhost:1313/tags/ai/</link>
+        <description>Ai - Tag - Skynetcat&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Jun 2025 17:43:20 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/ai/" rel="self" type="application/rss+xml" /><item>
     <title>Better LLM Sampler Settings</title>
     <link>http://localhost:1313/posts/better-llm-sampler-settings/</link>
     <pubDate>Mon, 09 Jun 2025 17:43:20 &#43;0000</pubDate>
@@ -244,15 +244,6 @@ Presence penalty: 1</code></pre></div>
     </div>
 <p>This post was originally meant to be published on Reddit but as you know, Reddit sucks. As soon as I post something anywhere they tell me that I don&rsquo;t have enough karma or they just delete it.</p>
 <p>Anyways, see you next time :)</p>]]></description>
-</item>
-<item>
-    <title>Getting Started</title>
-    <link>http://localhost:1313/posts/getting-started/</link>
-    <pubDate>Sun, 25 May 2025 12:31:40 &#43;0000</pubDate>
-    <author>Skynetcat</author>
-    <guid>http://localhost:1313/posts/getting-started/</guid>
-    <description><![CDATA[<p>I didn&rsquo;t write anything even though I already made a blog. Sad, isn&rsquo;t it?</p>
-<p>I just came to break the ice and write something. Maybe this will be the start of a blogging habit. I don&rsquo;t know.</p>]]></description>
 </item>
 </channel>
 </rss>
