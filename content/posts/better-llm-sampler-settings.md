@@ -1,5 +1,5 @@
 ---
-title: "Better Qwen 3 Settings"
+title: "Better LLM Sampler Settings"
 date: 2025-06-09T17:43:20Z
 lastmod: 2025-06-09T17:43:20Z
 draft: false
@@ -15,17 +15,15 @@ featuredImagePreview: ""
 hiddenFromHomePage: false
 hiddenFromSearch: false
 ---
-It's contrary to the recommended settings provided by the Qwen team.
-<!--more-->
-
 While I was trying [SmolVLM2](https://huggingface.co/ggml-org/SmolVLM2-500M-Video-Instruct-GGUF/blob/main/SmolVLM2-500M-Video-Instruct-f16.gguf) made by huggingface, I noticed it was hallucinating too much.
+<!--more-->
 
 I searched for its recommended sampler settings. Maybe something like what was provided for [Qwen 3](https://huggingface.co/Qwen/Qwen3-1.7B#best-practices):
 > For thinking mode (enable_thinking=True), use Temperature=0.6, TopP=0.95, TopK=20, and MinP=0. DO NOT use greedy decoding, as it can lead to performance degradation and endless repetitions.
 
 > For non-thinking mode (enable_thinking=False), we suggest using Temperature=0.7, TopP=0.8, TopK=20, and MinP=0.
 
-However, I accidentally found [this reddit post]() that explains how inference settings work for LLMs.
+However, I accidentally found [this reddit post](https://www.reddit.com/r/LocalLLaMA/comments/17vonjo/your_settings_are_probably_hurting_your_model_why/) that explains how inference settings work for LLMs.
 
 I just grabbed what was recommended at the end of that post, tried it and modified it a little bit:
 ```
@@ -43,7 +41,7 @@ Presence penalty: 1
 
 To my surprise, hallucination was cut to the minimum.
 
-It occured to me to try it also with [Qwen 3 1.7b Q4](https://huggingface.co/unsloth/Qwen3-1.7B-GGUF/blob/main/Qwen3-1.7B-Q4_0.gguf) and I found the results better!
+It occured to me to try it also with [Qwen 3 1.7b Q4](https://huggingface.co/unsloth/Qwen3-1.7B-GGUF/blob/main/Qwen3-1.7B-Q4_0.gguf) and I found the results better than using its recommended sampler settings!
 
 See yourself:
 {{< admonition note "Note" >}}
